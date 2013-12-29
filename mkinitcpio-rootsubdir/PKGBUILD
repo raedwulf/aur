@@ -1,6 +1,11 @@
+# Maintainer: Tai Chi Minh Ralph Eastwood <tcmreastwood@gmail.com>
+# 
+# Derived from: https://bbs.archlinux.org/viewtopic.php?pid=932362#p932362
+#
+
 pkgname='mkinitcpio-rootsubdir'
 pkgver=0.1
-pkgrel=1
+pkgrel=2
 pkgdesc='hook to set root at a subdirectory of the filesystem'
 url='https://github.com/raedwulf/aur/'
 arch=('any')
