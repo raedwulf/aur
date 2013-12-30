@@ -15,7 +15,8 @@ pkgdesc="The Linux Kernel and modules from Linus' git tree"
 #depends=('coreutils' 'linux-firmware-git' 'mkinitcpio')
 depends=('coreutils' 'mkinitcpio')
 
-pkgver=bca8d3b
+#pkgver=bca8d3b
+pkgver=3.1.10
 pkgrel=1
 url="http://www.kernel.org/"
 arch=(armv7h)
@@ -132,11 +133,11 @@ _config_cmd="${_config_cmd:-menuconfig}"
 #######
 # define required functions
 
-pkgver() {
-	cd "$_kernel_src"
-	[[ -n $_gitrev ]] && git reset --hard "$_gitrev"
-	git describe --always | sed 's/^v//;s/-/./g'
-}
+#pkgver() {
+#	cd "$_kernel_src"
+#	[[ -n $_gitrev ]] && git reset --hard "$_gitrev"
+#	git describe --always | sed 's/^v//;s/-/./g'
+#}
 
 # single package
 package() {
@@ -263,7 +264,7 @@ build() {
 	# Build the kernel and modules
 	################################
 	msg "Building kernel and modules..."
-	make $MAKEFLAGS V="$_verbose" bzImage modules
+	make -j 5 $MAKEFLAGS V="$_verbose" bzImage modules
 }
 
 
@@ -354,7 +355,7 @@ _generic_package_linux() {
 # mkinitcpio preset file for the '$pkgname' package
 
 ALL_config="/etc/mkinitcpio.conf"
-ALL_kver="${pkgver}${pkgext}"
+ALL_kver="${pkgver}${_pkgext}"
 
 PRESETS=('default')
 
