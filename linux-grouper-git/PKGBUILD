@@ -349,12 +349,18 @@ _generic_package_linux() {
 	############################
 	install -d "$pkgdir/etc/mkinitcpio.d"
 
+	cd "$srcdir/${_kernel_src##*/}"
+	_v="$(grep VERSION Makefile | head -n 1 | cut -d'=' -f2 | sed 's/ //g')"
+	_p="$(grep PATCHLEVEL Makefile | head -n 1 | cut -d'=' -f2 | sed 's/ //g')"
+	_s="$(grep SUBLEVEL Makefile | head -n 1 | cut -d'=' -f2 | sed 's/ //g')"
+	_e="$(grep EXTRAVERSION Makefile | head -n 1 | cut -d'=' -f2 | sed 's/ //g')"
+
 	msg "Generating $pkgname.preset..."
 	cat > "$pkgdir/etc/mkinitcpio.d/$pkgname.preset" <<EOF
 # mkinitcpio preset file for the '$pkgname' package
 
 ALL_config="/etc/mkinitcpio.conf"
-ALL_kver="${pkgver}${pkgext}"
+ALL_kver="${_v}.${_p}.${_s}-${_pkgext}"
 
 PRESETS=('default')
 
@@ -362,6 +368,7 @@ PRESETS=('default')
 default_image="/boot/initramfs-$pkgname.img"
 #default_options=""
 EOF
+	cd "$OLDPWD"
 
 
 	#######################
