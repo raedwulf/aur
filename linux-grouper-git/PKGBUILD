@@ -360,7 +360,7 @@ _generic_package_linux() {
 # mkinitcpio preset file for the '$pkgname' package
 
 ALL_config="/etc/mkinitcpio.conf"
-ALL_kver="${_v}.${_p}.${_s}-${_pkgext}"
+ALL_kver="${_v}.${_p}.${_s}${_pkgext}"
 
 PRESETS=('default')
 
