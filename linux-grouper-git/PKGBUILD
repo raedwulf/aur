@@ -264,7 +264,7 @@ build() {
 	# Build the kernel and modules
 	################################
 	msg "Building kernel and modules..."
-	make -j 5 $MAKEFLAGS V="$_verbose" bzImage modules
+	make $MAKEFLAGS V="$_verbose" bzImage modules
 }
 
 
