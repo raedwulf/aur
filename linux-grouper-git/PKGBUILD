@@ -13,11 +13,11 @@ pkgname=$pkgbase
 (( 1 )) && pkgname=("$pkgbase" "$pkgbase-headers" "$pkgbase-docs")
 pkgdesc="The Linux Kernel and modules from Linus' git tree"
 #depends=('coreutils' 'linux-firmware-git' 'mkinitcpio')
-depends=('coreutils' 'mkinitcpio')
+depends=('coreutils' 'mkinitcpio' 'mkinitcpio-rootsubdir')
 
 #pkgver=bca8d3b
 pkgver=3.1.10
-pkgrel=1
+pkgrel=2
 url="http://www.kernel.org/"
 arch=(armv7h)
 license=('GPL2')
@@ -361,7 +361,7 @@ PRESETS=('default')
 
 #default_config="/etc/mkinitcpio.conf"
 default_image="/boot/initramfs-$pkgname.img"
-#default_options=""
+default_options="-S autodetect -A rootsubdir"
 EOF
 
 
@@ -381,9 +381,10 @@ EOF
 	#######################
 	# Add grouper firmware
 	#######################
-	cp ${srcdir}/nvram.txt "$pkgdir/usr/lib/firmware"
-	cp ${srcdir}/fw_bcmdhd.bin "$pkgdir/usr/lib/firmware"
-	cp ${srcdir}/bcm4330.hcd "$pkgdir/usr/lib/firmware"
+	mkdir -p "$pkgdir/usr/lib/firmware"
+	cp ${srcdir}/nvram.txt "$pkgdir/usr/lib/firmware/"
+	cp ${srcdir}/fw_bcmdhd.bin "$pkgdir/usr/lib/firmware/"
+	cp ${srcdir}/bcm4330.hcd "$pkgdir/usr/lib/firmware/"
 
 	#######################
 	# Run depmod
