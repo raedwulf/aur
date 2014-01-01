@@ -1,0 +1,7 @@
+post_install ()
+{
+echo 'Updating pacman.conf';
+printf '%s' "[archnexus]
+Include = /etc/pacman.d/archnexus-repo
+" >> /etc/pacman.conf;
+}

@@ -1,0 +1,20 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Jon Allen <ylixir@gmail.com>
+pkgname=archnexus-repo
+pkgver=1
+pkgrel=1
+pkgdesc="Maintains a pointer to a current Nexus specific repository"
+arch=('any')
+url="https://github.com/ylixir/aur"
+license=('BSD')
+install="${pkgname}.install"
+source=($pkgname)
+md5sums=('220717c4bdf9ccbe9438054e341f4858')
+
+package() {
+	install -o root -g root -D ${srcdir}/${pkgname} ${pkgdir}/etc/pacman.d/${pkgname}
+}
